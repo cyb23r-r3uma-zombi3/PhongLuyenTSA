@@ -1,0 +1,223 @@
+
+        /* ============================================================
+           SKY EDU — LỚP CHUYỂN ĐỘNG MƯỢT MÀ (thêm độc lập, không đụng rule cũ)
+           Nguyên tắc: chỉ animate transform / opacity (filter ở hộp thoại nhỏ)
+           để giữ 60fps; tôn trọng prefers-reduced-motion ở cuối khối.
+           ============================================================ */
+        :root {
+            --ease-mem: cubic-bezier(.22, 1, .36, 1);     /* ra nhanh, vào nhẹ */
+            --ease-xoan: cubic-bezier(.34, 1.56, .64, 1); /* lò xo nhún nhẹ */
+            --ease-duoi: cubic-bezier(.65, 0, .35, 1);
+        }
+        html { scroll-behavior: smooth; }
+
+        /* ----- 1. Nâng cấp keyframes "hien-len" dùng chung cho trang / tab ----- */
+        @keyframes hien-len {
+            from { opacity: 0; transform: translate3d(0, 28px, 0) scale(.99); }
+            to   { opacity: 1; transform: none; }
+        }
+        .pane.active    { animation: hien-len .5s  var(--ease-mem) both; }
+        .ad-pane.active { animation: hien-len .45s var(--ease-mem) both; }
+        .container.courses-mode  .courses-page,
+        .container.practice-mode .practice-page,
+        .container.schedule-mode .schedule-page,
+        .container.login-mode    .login-page,
+        .container.register-mode .register-page,
+        .container.admin-mode    .admin-page,
+        .container.docs-mode     .docs-page { animation: hien-len .6s var(--ease-mem) both; }
+
+        /* ----- 2. Cross-fade toàn trang (script bật View Transitions API) ----- */
+        ::view-transition-old(root) { animation: sky-vt-cu  .25s var(--ease-duoi) both; }
+        ::view-transition-new(root) { animation: sky-vt-moi .5s  var(--ease-mem)  both; }
+        @keyframes sky-vt-cu  { to   { opacity: 0; transform: scale(.985); } }
+        @keyframes sky-vt-moi { from { opacity: 0; transform: scale(1.015); } }
+
+        /* ----- 3. Hộp thoại: mở nảy nhẹ, đóng mượt (script gắn sky-out) ----- */
+        .modal.open { animation: sky-mo .3s ease both; }
+        .modal.open .modal-box { animation: sky-pop .5s var(--ease-mem) both; }
+        .lmodal.on  { animation: sky-mo .35s ease both; }
+        .lmodal.on .lmbox { animation: sky-pop .45s var(--ease-mem) both; }
+        .lfull.on   { animation: sky-mo .35s ease both; }
+        .lfull.on > .lconf, .lfull.on > .lmbox { animation: sky-pop .45s var(--ease-mem) both; }
+        #lab.open   { animation: hien-len .45s var(--ease-mem) both; }
+        @keyframes sky-mo  { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes sky-pop {
+            from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.94); }
+            to   { opacity: 1; transform: none; }
+        }
+        .sky-out { animation: sky-mo-nguoc .22s var(--ease-duoi) both !important; pointer-events: none; }
+        .sky-out .modal-box, .sky-out .lmbox, .sky-out .lconf { animation: sky-pop-nguoc .22s var(--ease-duoi) both; }
+        @keyframes sky-mo-nguoc  { to { opacity: 0; } }
+        @keyframes sky-pop-nguoc { to { opacity: 0; transform: translate3d(0, 12px, 0) scale(.96); } }
+
+        /* ----- 4. Thẻ / khối: trồi lên khi xuất hiện (backwards để hover vẫn mượt) ----- */
+        @keyframes sky-the {
+            from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.97); }
+            to   { opacity: 1; transform: none; }
+        }
+        .lcard     { animation: sky-the .55s var(--ease-mem) backwards; }
+        .teacher   { animation: sky-the .5s  var(--ease-mem) backwards; }
+        .box       { animation: sky-the .55s var(--ease-mem) backwards; }
+        .banner    { animation: sky-the .65s var(--ease-mem) backwards; }
+        .lv.on     { animation: sky-the .5s  var(--ease-mem) backwards; }
+        .stat > div { animation: sky-the .5s var(--ease-mem) backwards; }
+        .stat > div:nth-child(2) { animation-delay: .07s; }
+        .stat > div:nth-child(3) { animation-delay: .14s; }
+        /* Danh sách render động: lần lượt trồi lên theo thứ tự */
+        .lcards > .lcard:nth-child(2), .kt-grid > .lcard:nth-child(2) { animation-delay: .05s; }
+        .lcards > .lcard:nth-child(3), .kt-grid > .lcard:nth-child(3) { animation-delay: .09s; }
+        .lcards > .lcard:nth-child(4), .kt-grid > .lcard:nth-child(4) { animation-delay: .13s; }
+        .lcards > .lcard:nth-child(5), .kt-grid > .lcard:nth-child(5) { animation-delay: .17s; }
+        .lcards > .lcard:nth-child(6), .kt-grid > .lcard:nth-child(6) { animation-delay: .21s; }
+        .lcards > .lcard:nth-child(7), .kt-grid > .lcard:nth-child(7) { animation-delay: .25s; }
+        .lcards > .lcard:nth-child(8), .kt-grid > .lcard:nth-child(8) { animation-delay: .29s; }
+        .teachers > .teacher:nth-child(2) { animation-delay: .05s; }
+        .teachers > .teacher:nth-child(3) { animation-delay: .10s; }
+        .teachers > .teacher:nth-child(4) { animation-delay: .15s; }
+        .teachers > .teacher:nth-child(5) { animation-delay: .20s; }
+        .hero-center > * { animation: sky-the .6s var(--ease-mem) backwards; }
+        .hero-center > *:nth-child(2) { animation-delay: .08s; }
+        .hero-center > *:nth-child(3) { animation-delay: .16s; }
+        .hero-center > *:nth-child(4) { animation-delay: .24s; }
+        .hero-center > *:nth-child(5) { animation-delay: .32s; }
+
+        /* ----- 5. Thẻ bài lơ lửng khi rê chuột ----- */
+        .lcard { transition: transform .4s var(--ease-mem), box-shadow .4s var(--ease-mem); }
+        .lcard:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(30, 91, 216, .16); }
+        .lcard:active { transform: translateY(-2px) scale(.99); }
+
+        /* ----- 6. Nút bấm: nhún, lơ lửng, vệt sáng lướt qua ----- */
+        .btn, .lbtn, .btn-sec, .btn-danger, .btn-link, .ad-tab, .kt-ok, .tab {
+            transition: transform .35s var(--ease-xoan), box-shadow .35s var(--ease-mem),
+                        background-color .3s ease, color .3s ease, filter .3s ease, border-color .3s ease;
+        }
+        .btn:hover, .lbtn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(30, 91, 216, .35); }
+        .btn:active, .lbtn:active, .btn-sec:active, .btn-danger:active,
+        .btn-link:active, .ad-tab:active, .kt-ok:active, .tab:active { transform: translateY(0) scale(.96); }
+        .btn:not(:disabled), .lbtn:not(:disabled) { position: relative; overflow: hidden; }
+        .btn:not(:disabled)::after, .lbtn:not(:disabled)::after {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, .38) 50%, transparent 58%);
+            transform: translateX(-130%);
+            transition: transform .75s var(--ease-mem);
+        }
+        .btn:not(:disabled):hover::after, .lbtn:not(:disabled):hover::after { transform: translateX(130%); }
+
+        /* ----- 7. Tab có thanh chỉ báo trượt ra ----- */
+        .tab, .ad-tab { position: relative; }
+        .tab::after, .ad-tab::after {
+            content: ""; position: absolute; left: 50%; bottom: 7px; width: 0; height: 3px;
+            border-radius: 99px; background: #1e5bd8; transform: translateX(-50%);
+            transition: width .4s var(--ease-xoan), background-color .3s ease;
+        }
+        .tab:hover::after  { width: 30px; }
+        .tab.active::after { width: 46px; background: #fff; }
+        .ad-tab::after { bottom: 6px; }
+        .ad-tab:hover::after  { width: 26px; }
+        .ad-tab.active::after { width: 34px; background: #fff; }
+
+        /* ----- 8. Menu trái & điều hướng phòng luyện ----- */
+        .menu a { transition: background-color .3s var(--ease-mem), color .3s var(--ease-mem), transform .3s var(--ease-mem); }
+        .l-nav a {
+            transition: background-color .3s var(--ease-mem), color .3s ease,
+                        border-color .35s var(--ease-mem), transform .3s var(--ease-mem);
+        }
+        .l-nav a:hover  { transform: translateX(4px); }
+        .l-nav a:active { transform: translateX(4px) scale(.98); }
+        .l-nav a i { transition: transform .4s var(--ease-xoan); }
+        .l-nav a:hover i, .l-nav a.act i { transform: scale(1.2); }
+        .l-back { transition: transform .3s var(--ease-xoan), color .3s ease; }
+        .l-back:hover { transform: translateX(-4px) scale(1.15); }
+        .cat {
+            transition: transform .3s var(--ease-xoan), box-shadow .3s var(--ease-mem),
+                        background-color .3s ease, color .3s ease;
+        }
+        .cat:hover  { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 22px rgba(30, 91, 216, .25); }
+        .cat:active { transform: translateY(-1px) scale(.99); }
+
+        /* ----- 9. Ô nhập: quầng sáng khi focus ----- */
+        input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]),
+        select, textarea {
+            transition: border-color .3s var(--ease-mem), box-shadow .3s var(--ease-mem), background-color .3s ease;
+        }
+        input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
+        select:focus, textarea:focus {
+            border-color: #1e5bd8;
+            box-shadow: 0 0 0 4px rgba(30, 91, 216, .13);
+        }
+
+        /* ----- 10. Toast nảy lên, dropdown mở có lò xo ----- */
+        .toast { transition: opacity .4s var(--ease-mem), transform .55s var(--ease-xoan); }
+        .user-menu .dropdown { transition: opacity .3s var(--ease-mem), transform .5s var(--ease-xoan), visibility .3s; }
+
+        /* ----- 11. Thanh cuộn mềm mại trong các vùng cuộn ----- */
+        .lv::-webkit-scrollbar, .table-wrap::-webkit-scrollbar, .kq-body::-webkit-scrollbar { width: 10px; height: 10px; }
+        .lv::-webkit-scrollbar-thumb, .table-wrap::-webkit-scrollbar-thumb, .kq-body::-webkit-scrollbar-thumb {
+            background: rgba(30, 91, 216, .28); border-radius: 99px;
+            border: 3px solid transparent; background-clip: content-box;
+        }
+        .lv::-webkit-scrollbar-thumb:hover, .table-wrap::-webkit-scrollbar-thumb:hover {
+            background: rgba(30, 91, 216, .45); background-clip: content-box;
+        }
+
+        /* ----- 12. Tôn trọng người dùng giảm chuyển động ----- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+            ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+        }
+    
+        /* ===== CA THI ===== */
+        .ca-btn {
+            padding: 20px 32px; border: none; border-radius: 6px; color: white;
+            font-size: 18px; font-weight: bold; cursor: pointer; background-color: #0a1f5c;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+        .ca-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); filter: brightness(1.1); }
+        .ca-row {
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            padding: 12px; margin-top: 10px; border: 1px solid #e3ecff; border-radius: 10px;
+        }
+        .dk-ok { margin-top: 12px; padding: 12px; border-radius: 8px; background-color: #dcf5e8; color: #0f8a5f; }
+        .ca-head { margin: 16px 0 10px; padding: 14px; background-color: #f5f8ff; border-radius: 10px; }
+        .dl-card input, .dl-card select {
+            width: 100%; padding: 10px 12px; border: 1px solid #d9e2f3; border-radius: 8px;
+            margin-bottom: 10px; font-size: 15px; outline: none; font-family: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .dl-card input:focus, .dl-card select:focus { border-color: #1e5bd8; box-shadow: 0 0 0 3px #e0eaff; }
+        .dl-card .btn-link, .dl-card .btn-sec { margin-top: 4px; }
+
+        /* ===== KHAI BÁO THÔNG TIN KHI ĐĂNG KÝ CA THI ===== */
+        .dk-profile { margin: 16px 0 6px; padding: 14px; border: 1px dashed #b9cdf5; border-radius: 10px; background-color: #f8fbff; }
+        .dk-profile h4 { margin: 0 0 10px; color: #1e5bd8; }
+        .dk-profile .field { margin-bottom: 10px; }
+
+        /* ===== TRANG KHẢO THÍ ===== */
+        .exams-page { display: none; }
+        .container.exams-mode { grid-template-columns: 1fr; }
+        .container.exams-mode .sidebar, .container.exams-mode .main, .container.exams-mode .right { display: none; }
+        .container.exams-mode .exams-page { display: block; animation: hien-len 0.5s ease both; }
+        .ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 20px; }
+        .ex-card { background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(10, 31, 92, 0.06); transition: transform 0.25s ease, box-shadow 0.25s ease; animation: hien-len 0.4s ease both; }
+        .ex-card:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(30, 91, 216, 0.15); }
+        .ex-head { padding: 18px 20px; border-bottom: 1px solid #eef1f7; font-size: 18px; font-weight: bold; color: #1a1a1a; }
+        .ex-head small { display: block; margin-top: 4px; font-weight: normal; color: #778; font-size: 14px; }
+        .ex-body { padding: 6px 20px; }
+        .ex-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; color: #667; border-bottom: 1px solid #f3f5fa; }
+        .ex-row:last-child { border-bottom: none; }
+        .ex-row b { color: #222; text-align: right; }
+        .ex-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 20px; border-top: 1px solid #eef1f7; }
+        .ex-note { font-size: 13px; color: #0f8a5f; margin-top: 6px; text-align: right; }
+        .btn-start { padding: 12px 22px; border: none; border-radius: 8px; background-color: #0f8a5f; color: white; font-weight: bold; font-size: 15px; cursor: default; }
+        .btn-start.pulse { animation: nhip 1.6s ease-in-out infinite; }
+        .btn-now { padding: 12px 22px; border: none; border-radius: 8px; background-color: #1e5bd8; color: white; font-weight: bold; font-size: 15px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .btn-now:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(30, 91, 216, 0.35); }
+        .btn-off { padding: 12px 22px; border: none; border-radius: 8px; background-color: #9aa3b5; color: white; font-weight: bold; font-size: 15px; cursor: default; }
+        @media (max-width: 1000px) { .ex-grid { grid-template-columns: 1fr; } }
+
+        /* ===== THẺ CA THI (theo mẫu) ===== */
+        .btn-now { background-color: #0f8a5f; }
+        .btn-now:hover { box-shadow: 0 6px 14px rgba(15, 138, 95, 0.4); }
+        .btn-soon { padding: 12px 22px; border: none; border-radius: 8px; background-color: #5b8def; color: white; font-weight: bold; font-size: 15px; cursor: default; }
+        .ex-head { font-size: 17px; }

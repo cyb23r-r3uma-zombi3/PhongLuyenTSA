@@ -1,0 +1,62 @@
+
+        .pf-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: start; }
+        .pf-left, .pf-right { background: #fff; border-radius: 18px; box-shadow: 0 6px 22px rgba(0,0,0,.06); }
+        .pf-left { padding: 30px 22px 22px; text-align: center; }
+        .pf-right { padding: 26px 30px 30px; }
+        .pf-avatar { border-radius: 50%; background: linear-gradient(160deg,#c7d2fe,#6366f1); color: #fff; font-weight: bold; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; position: relative; }
+        .pf-ava-big { width: 120px; height: 120px; margin: 0 auto 12px; font-size: 44px; box-shadow: 0 0 0 4px #fff, 0 0 0 6px #c8102e; }
+        .pf-ava-mid { width: 112px; height: 112px; font-size: 40px; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #c8102e; flex: none; }
+        .pf-cam { position: absolute; right: 2px; bottom: 2px; width: 30px; height: 30px; border-radius: 50%; background: #c8102e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; }
+        .pf-name { margin: 0; font-size: 19px; color: #111; }
+        .pf-mail { margin: 6px 0 22px; color: #6b7280; font-size: 14px; word-break: break-all; }
+        .pf-menu { border-top: 1px solid #eef0f4; padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+        .pf-item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 13px 14px; border: 0; background: transparent; border-radius: 12px; font-size: 16px; color: #111; cursor: pointer; text-align: left; transition: background .2s ease, transform .2s ease; }
+        .pf-item span { width: 22px; text-align: center; }
+        .pf-item i { margin-left: auto; font-style: normal; color: #9ca3af; }
+        .pf-item:hover { background: #f5f6f8; transform: translateX(3px); }
+        .pf-item.on { background: #c8102e; color: #fff; }
+        .pf-item.on i { color: #fff; }
+        .pf-logout { margin-top: 16px; border: 0; background: transparent; color: #111; font-size: 16px; cursor: pointer; padding: 10px; }
+        .pf-title { margin: 0 0 22px; font-size: 22px; color: #c8102e; }
+        .pf-top { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 26px; }
+        .pf-actions { display: flex; flex-direction: column; gap: 10px; }
+        .pf-btn-do { background: #c8102e; color: #fff; border: 0; border-radius: 10px; padding: 13px 22px; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+        .pf-btn-trang { background: #fff; color: #111; border: 1px solid #d1d5db; border-radius: 10px; padding: 13px 22px; font-size: 16px; cursor: pointer; transition: transform .2s ease; }
+        .pf-btn-do:hover, .pf-btn-trang:hover { transform: translateY(-2px); }
+        .pf-sub { display: flex; gap: 18px; margin-top: 4px; font-size: 14px; }
+        .pf-link { background: none; border: 0; color: #c8102e; cursor: pointer; padding: 0; font-size: 14px; }
+        .pf-rows { border-top: 1px solid #eef0f4; }
+        .pf-row { display: grid; grid-template-columns: 200px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px dashed #eceef2; font-size: 16px; }
+        .pf-row span { color: #6b7280; }
+        .pf-row b { color: #111; font-weight: 600; word-break: break-word; }
+        .pf-trong { color: #9ca3af; font-style: normal; font-weight: normal; }
+        .pf-khoa { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 16px; }
+        .pf-khoa-i { background: #f5f7fb; border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+        @media (max-width: 760px) { .pf-wrap { grid-template-columns: 1fr; } .pf-row { grid-template-columns: 1fr; gap: 4px; } }
+    
+        /* Nút liên hệ nhanh ở mép phải màn hình */
+        .sk-float { position: fixed; right: 16px; bottom: 18px; z-index: 250; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .sk-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0,0,0,.22); border: 2px solid rgba(255,255,255,.85); text-decoration: none; transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; animation: sk-in .6s cubic-bezier(.2,.8,.2,1) both; }
+        .sk-btn:hover { transform: scale(1.12); box-shadow: 0 10px 24px rgba(0,0,0,.28); }
+        .sk-btn:nth-child(2) { animation-delay: .08s; }
+        .sk-btn:nth-child(3) { animation-delay: .16s; }
+        .sk-zalo { background: #0068ff; }
+        .sk-zalo-t { color: #fff; font-weight: bold; font-size: 13px; letter-spacing: .3px; }
+        .sk-mess { background: linear-gradient(135deg, #00b2ff, #006aff); }
+        .sk-fb { background: #1877f2; }
+        .sk-fb-t { color: #fff; font-weight: bold; font-size: 30px; font-family: Arial, sans-serif; line-height: 1; margin-top: 2px; }
+        @keyframes sk-in { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: none; } }
+        @media (max-width: 640px) { .sk-btn { width: 42px; height: 42px; } .sk-float { gap: 8px; right: 8px; bottom: 12px; } .sk-fb-t { font-size: 24px; } }
+
+        .x-anh { display: block; max-width: 100%; max-height: 360px; margin: 10px 0 14px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; object-fit: contain; }
+        .rv-anh { display: block; max-width: 100%; max-height: 320px; margin: 12px 0 4px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; object-fit: contain; }
+
+        /* Trong lúc thi / làm bài: ẩn nút Zalo, Messenger, Facebook để không vướng */
+        body:has(#l-exam.on) .sk-float,
+        body:has(#l-mode.on) .sk-float,
+        body:has(#pe.on) .sk-float,
+        body:has(#rv.on) .sk-float,
+        body:has(#dialog.open) .sk-float,
+        body:has(#ns.on) .sk-float,
+        body:has(#kq-ov.on) .sk-float,
+        body:has(#l-res.on) .sk-float { display: none !important; }

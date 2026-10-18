@@ -1,0 +1,16 @@
+
+        .story.user { background-color: #1e3a8a; background-size: cover; background-position: center; position: relative; }
+        .story.user::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%); pointer-events: none; }
+        .story.user .story-avatar, .story.user .story-name { position: relative; z-index: 1; }
+        .story-play { position: absolute; top: 10px; right: 42px; z-index: 2; width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,.9); color: #1e5bd8; font-size: 12px; cursor: pointer; }
+        .story-xoa { position: absolute; top: 10px; right: 10px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; border: none; background: rgba(0,0,0,.45); color: #fff; font-size: 12px; cursor: pointer; }
+    
+        body:not(.is-admin) #btn-tao-tin, body:not(.is-admin) .story-xoa { display: none !important; }
+        .cmt-box { margin-top: 10px; padding-top: 10px; border-top: 1px solid #eef1f7; }
+        .cmt-item { padding: 6px 0; font-size: 14px; color: #222; }
+        .cmt-item small { color: #888; }
+        .cmt-trong { color: #888; font-size: 14px; margin: 4px 0; }
+        .cmt-nhap { display: flex; gap: 8px; margin-top: 8px; }
+        .cmt-nhap input { flex: 1; padding: 10px 12px; border: 1px solid #d9e2f3; border-radius: 8px; font-size: 14px; outline: none; }
+        .cmt-nhap input:focus { border-color: #1e5bd8; }
+        .cmt-gui { padding: 10px 16px; border: none; border-radius: 8px; background: #1e5bd8; color: #fff; font-weight: bold; cursor: pointer; }

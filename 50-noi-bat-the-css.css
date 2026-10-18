@@ -1,0 +1,7 @@
+
+        .nb-card { position: relative; }
+        .nb-rank { position: absolute; top: 10px; left: 12px; background: rgba(255,255,255,.9); color: #1e5bd8; font-weight: bold; font-size: 13px; padding: 2px 8px; border-radius: 20px; }
+        .nb-ava { display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 50%; background: #fff; color: #1e5bd8; font-weight: bold; font-size: 22px; margin-top: 30px; }
+        .nb-ten { display: block; margin-top: 12px; font-size: 15px; }
+        .nb-diem { display: block; font-size: 12px; font-weight: normal; opacity: .9; margin-top: 4px; }
+    

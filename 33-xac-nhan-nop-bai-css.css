@@ -1,0 +1,68 @@
+
+        .ns-wrap { position: fixed; inset: 0; z-index: 170; display: none; align-items: center; justify-content: center; background: rgba(20, 20, 30, 0.45); padding: 20px; }
+        .ns-wrap.on { display: flex; animation: hien-len 0.25s ease both; }
+        .ns-box { position: relative; width: 100%; max-width: 380px; background: white; border-radius: 16px; padding: 34px 28px 28px; text-align: center; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); }
+        .ns-x { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border: none; border-radius: 50%; background: #4b5565; color: white; font-size: 14px; cursor: pointer; }
+        .ns-circle { width: 120px; height: 120px; margin: 0 auto 22px; border-radius: 50%; background: #f7941d; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 18px rgba(247, 148, 29, 0.35); }
+        .ns-circle b { font-size: 30px; line-height: 1; }
+        .ns-circle span { font-size: 15px; margin-top: 4px; }
+        .ns-text { font-size: 17px; line-height: 1.5; color: #222; margin: 0 0 26px; }
+        .ns-btns { display: flex; gap: 14px; }
+        .ns-btns button { flex: 1; padding: 15px 10px; border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease; }
+        .ns-btns button:hover { transform: translateY(-2px); filter: brightness(1.05); }
+        .ns-lam { background: #1e3ea8; }
+        .ns-nop { background: #e0262e; }
+    
+        /* Màn xác nhận: thu nhỏ và trình bày như mẫu */
+        .pe-card-sm { max-width: 680px; padding: 30px 34px; }
+        .pe-card-sm .pe-brand.pe-center { flex-direction: row; justify-content: center; text-align: left; gap: 12px; margin-bottom: 16px; }
+        .pe-card-sm .pe-brand.pe-center img { height: 64px; width: auto; }
+        .pe-card-sm .pe-brand.pe-center small { font-size: 14px; }
+        .pe-card-sm .pe-brand.pe-center b { font-size: 17px; }
+        .pe-card-sm .pe-title2 { font-size: 23px; margin: 2px 0 16px; }
+        .pe-card-sm .pe-rows > div { justify-content: flex-start; gap: 0; padding: 9px 0; font-size: 15px; }
+        .pe-card-sm .pe-rows span { width: 190px; flex-shrink: 0; }
+        .pe-card-sm .pe-rows b { text-align: left; font-weight: normal; color: #222; }
+        .pe-card-sm .pe-note { font-size: 14px; margin: 14px 0 16px; }
+        .pe-card-sm .pe-start { padding: 14px; font-size: 16px; }
+        .pe-card-sm .pe-foot { padding-top: 14px; font-size: 15px; }
+
+        /* Tối ưu khi làm bài: tắt nền chuyển động toàn trang để màn thi không bị giật */
+        body:has(#l-exam.on)::before,
+        body:has(#pe.on)::before,
+        body:has(#l-mode.on)::before,
+        body:has(#dialog.open)::before,
+        body:has(#ns.on)::before { display: none !important; animation: none !important; }
+        body:has(#l-exam.on) .x-clock b,
+        body:has(#l-exam.on) .x-nums button,
+        body:has(#l-exam.on) .x-chip { animation: none !important; transition: none !important; }
+
+        /* Màn logo chuyển cảnh (dựng theo video quay màn hình): logo bật ra giữa màn hình → lướt sang phải →
+           vút về bên trái, kéo chữ SKD lộ ra phía sau (có vệt mờ chuyển động) → ánh sáng quét qua logo.
+           Mọi chuyển động do JS điều khiển theo một đồng hồ chung (hàm peSplash) nên các lớp luôn khớp nhau. */
+        .spl-wrap { position: fixed; inset: 0; z-index: 175; background: #fff; display: none; align-items: center; justify-content: center; overflow: hidden; }
+        .spl-wrap.on { display: flex; }
+        .spl-stage { position: relative; flex: none; width: min(560px, 80vw); aspect-ratio: 611 / 275; }
+        .spl-stage > img, .spl-shine { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; border-radius: 0; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+        /* Logo gốc được cắt làm hai phần bằng đường cắt hình học: biểu tượng (cánh buồm + chữ S uốn) và chữ SKD */
+        .spl-ico, .spl-gh { transform-origin: 20.3% 52%; will-change: transform, opacity;
+                            clip-path: polygon(0 0, 100% 0, 100% 30.55%, 33.72% 30.55%, 33.72% 100%, 0 100%); }
+        .spl-gh { opacity: 0; }
+        .spl-txt { opacity: 0; will-change: clip-path; }
+        .spl-shine { opacity: 0; background: linear-gradient(100deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.95) 50%, rgba(255,255,255,0) 60%) no-repeat;
+                     background-size: 300% 100%; background-position: 95% 0;
+                     -webkit-mask: var(--spl-mask) center / 100% 100% no-repeat; mask: var(--spl-mask) center / 100% 100% no-repeat; }
+        /* Thanh "Đang kiểm tra thông tin bài thi" */
+        .pe-load { text-align: center; padding: 8px 0 4px; }
+        .pe-bar { height: 10px; background: #e9edf3; border-radius: 6px; overflow: hidden; }
+        .pe-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #1e90ff, #38bdf8, #1e90ff); background-size: 200% 100%; animation: pe-fill 1.8s linear forwards, pe-shine 1.1s linear infinite; }
+        @keyframes pe-shine { to { background-position: -200% 0; } }
+        @keyframes pe-fill { to { width: 100%; } }
+        .pe-load p { margin: 12px 0 0; color: #333; font-size: 15px; }
+        .pe-pct { color: #1e90ff; margin-left: 6px; }
+        /* Ẩn màn tải cũ của phòng luyện (đã thay bằng thanh ở trên) */
+        #c-load { display: none !important; }
+
+        /* Logo ngang: giữ đúng tỉ lệ, không cắt tròn */
+        .logo { width: auto !important; height: 56px !important; object-fit: contain !important; border-radius: 0 !important; }
+        .copy-logo { object-fit: contain; }

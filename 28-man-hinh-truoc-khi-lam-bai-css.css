@@ -1,0 +1,5 @@
+
+        .ex-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .ex-toggle { padding: 12px 22px; border: 1px solid #e3ecff; border-radius: 10px; background: white; color: #d0021b; font-size: 15px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .ex-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(10, 31, 92, 0.12); }
+    

@@ -1,0 +1,4 @@
+
+        .room-btn.khoa { position: relative; opacity: .75; cursor: not-allowed; filter: grayscale(.25); }
+        .room-btn.khoa:hover { transform: none !important; box-shadow: none !important; }
+    

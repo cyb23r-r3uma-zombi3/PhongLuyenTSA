@@ -1,0 +1,43 @@
+
+        .cc-page { max-width: 760px; margin: 0 auto; background: #fff; border: 1px solid #e5e7eb; padding: 22px 26px 16px; color: #111; }
+        .cc-head { display: flex; align-items: center; gap: 14px; }
+        .cc-head img { height: 60px; width: auto; }
+        .cc-head small { display: block; color: #d0021b; font-size: 12px; }
+        .cc-head b { display: block; font-size: 15px; }
+        .cc-head i { display: block; font-size: 11px; color: #555; }
+        .cc-band { margin-top: 16px; background: #c8102e; color: #fff; text-align: center; font-weight: bold; padding: 10px; font-size: 16px; }
+        .cc-sub { text-align: center; color: #c8102e; font-weight: bold; margin: 10px 0 14px; }
+        .cc-body { display: flex; gap: 20px; flex-wrap: wrap; }
+        .cc-fields { flex: 1; min-width: 280px; font-size: 12.5px; }
+        .cc-fields > div { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+        .cc-fields span { width: 190px; color: #333; }
+        .cc-fields b { flex: 1; background: #e9ebef; padding: 3px 8px; font-weight: normal; min-height: 16px; }
+        .cc-scores { width: 260px; }
+        .cc-overall { background: #c8102e; color: #fff; padding: 14px; border-radius: 4px; text-align: center; }
+        .cc-overall small { font-size: 12px; }
+        .cc-overall b { display: block; font-size: 40px; line-height: 1.1; }
+        .cc-overall span { font-size: 12px; }
+        .cc-correct { margin-top: 12px; font-size: 12px; }
+        .cc-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .cc-row em { background: #c8102e; color: #fff; font-style: normal; font-weight: bold; font-size: 18px; padding: 6px 12px; border-radius: 4px; }
+        .cc-row span { font-size: 11px; color: #555; }
+        .cc-row p { margin: 0; font-size: 12px; font-weight: bold; color: #c8102e; }
+        .cc-foot { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 22px; gap: 20px; flex-wrap: wrap; }
+        .cc-no small { font-size: 11px; color: #444; }
+        .cc-no b { display: block; font-size: 12px; }
+        .cc-sign { text-align: center; font-size: 12px; }
+        .cc-sign div:nth-child(2) { font-weight: bold; margin-top: 4px; }
+        .cc-sign i { font-size: 11px; color: #555; }
+        .cc-note { margin-top: 18px; text-align: center; font-size: 11px; color: #777; background: #f3f4f6; padding: 8px; }
+            .cc-qrbox { display: flex; flex-direction: column; gap: 6px; }
+
+        /* Giấy chứng nhận theo khổ dọc A4, như mẫu */
+        .cc-page { max-width: 560px !important; width: 100%; margin: 0 auto; padding: 24px 26px 18px !important; aspect-ratio: 210 / 297; display: flex; flex-direction: column; box-sizing: border-box; }
+        .cc-body { flex-direction: column; gap: 14px; }
+        .cc-fields { min-width: 0 !important; width: 100%; }
+        .cc-fields span { width: 200px !important; }
+        .cc-scores { width: 100% !important; display: flex; gap: 16px; align-items: stretch; }
+        .cc-overall { width: 44%; display: flex; flex-direction: column; justify-content: center; }
+        .cc-correct { flex: 1; margin-top: 0 !important; }
+        .cc-foot { margin-top: auto !important; }
+        .cc-note { margin-top: 12px !important; }
